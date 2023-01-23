@@ -11,7 +11,15 @@ import ContactUs from "./PageComponents/ContactUs";
 import AboutUs from "./Components/AboutUs";
 import HaveFlat from "./PageComponents/haveFlat";
 import FlatDetails from "./PageComponents/flatDetails";
+import AddFlat from "./PageComponents/addFlat";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchFlats } from "./Services/flat.slice";
 function App() {
+  let dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(fetchFlats());
+  },[])
   return (
     <BrowserRouter>
     <TopBar></TopBar>
@@ -25,6 +33,7 @@ function App() {
       <Route path="/search-flat" element={<HaveFlat></HaveFlat>}></Route>
       <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
       <Route path="/profilePage" element={<UserProfile></UserProfile>}></Route>
+      <Route path="/addFlat" element={<AddFlat></AddFlat>}></Route>
 
     </Routes>
     <Footer></Footer>

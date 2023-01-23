@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux"
+
 export default function HaveFlat() {
+    const { flatList } = useSelector(state => state.flat.value);
     return <>
 
         {/* <!-- Page Header Start --> */}
@@ -144,114 +147,57 @@ export default function HaveFlat() {
                             <h1>Our Popular Courses</h1>
                         </div>
                         <div className="row">
-                            <div className="col-lg-4 col-md-6 mb-4">
-                                <div className="rounded overflow-hidden mb-2">
-                                    <img className="img-fluid" src="img/course-1.jpg" alt="" />
-                                    <div className="bg-secondary p-4">
-                                        <div className="d-flex justify-content-between mb-3">
-                                            <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                            <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                        </div>
-                                        <a className="h5" href="">Web design & development courses for beginner</a>
-                                        <div className="border-top mt-4 pt-4">
-                                            <div className="d-flex justify-content-between">
-                                                <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                                <h5 className="m-0">$99</h5>
+                            <div class="col-12 pb-1">
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <form action="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search by Area" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text bg-transparent text-primary">
+                                                    <i class="fa fa-search"></i>
+                                                </span>
                                             </div>
+                                        </div>
+                                    </form>
+                                    <div class="dropdown ml-4">
+                                        <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Sort by
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" href="#">Latest</a>
+                                            <a class="dropdown-item" href="#">Popularity</a>
+                                            <a class="dropdown-item" href="#">Best Rating</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4 col-md-6 mb-4">
-                                <div className="rounded overflow-hidden mb-2">
-                                    <img className="img-fluid" src="img/course-2.jpg" alt="" />
-                                    <div className="bg-secondary p-4">
-                                        <div className="d-flex justify-content-between mb-3">
-                                            <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                            <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                        </div>
-                                        <a className="h5" href="">Web design & development courses for beginner</a>
-                                        <div className="border-top mt-4 pt-4">
-                                            <div className="d-flex justify-content-between">
-                                                <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                                <h5 className="m-0">$99</h5>
+                            {
+                                flatList.map((item) =>
+                                    <div className="col-lg-4 col-md-6 mb-4">
+                                        <div className="rounded overflow-hidden mb-2">
+                                            <img className="img-fluid"  src={"http://localhost:3000/FlatImage/" + item.flatImages[1]} alt="" />
+                                            <div className="bg-secondary p-4">
+                                                <div className="d-flex justify-content-between mb-3">
+                                                    <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>{item.Occupancy}</small>
+                                                    <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>{item.AvailableDate}</small>
+                                                </div>
+                                                <a className="h5" href="">{item.flatLocation.substr(0,13)}....</a>
+                                                <h6 className="mt-3">{item.userId.userName}</h6>
+                                                <div className="border-top mt-4 pt-4">
+                                                    <div className="d-flex justify-content-between">
+                                                        <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>45% Match</h6>
+                                                        <h5 className="m-0">Rent {item.Rent}</h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 mb-4">
-                                <div className="rounded overflow-hidden mb-2">
-                                    <img className="img-fluid" src="img/course-3.jpg" alt="" />
-                                    <div className="bg-secondary p-4">
-                                        <div className="d-flex justify-content-between mb-3">
-                                            <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                            <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                        </div>
-                                        <a className="h5" href="">Web design & development courses for beginner</a>
-                                        <div className="border-top mt-4 pt-4">
-                                            <div className="d-flex justify-content-between">
-                                                <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                                <h5 className="m-0">$99</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 mb-4">
-                                <div className="rounded overflow-hidden mb-2">
-                                    <img className="img-fluid" src="img/course-4.jpg" alt="" />
-                                    <div className="bg-secondary p-4">
-                                        <div className="d-flex justify-content-between mb-3">
-                                            <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                            <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                        </div>
-                                        <a className="h5" href="">Web design & development courses for beginner</a>
-                                        <div className="border-top mt-4 pt-4">
-                                            <div className="d-flex justify-content-between">
-                                                <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                                <h5 className="m-0">$99</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 mb-4">
-                                <div className="rounded overflow-hidden mb-2">
-                                    <img className="img-fluid" src="img/course-5.jpg" alt="" />
-                                    <div className="bg-secondary p-4">
-                                        <div className="d-flex justify-content-between mb-3">
-                                            <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                            <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                        </div>
-                                        <a className="h5" href="">Web design & development courses for beginner</a>
-                                        <div className="border-top mt-4 pt-4">
-                                            <div className="d-flex justify-content-between">
-                                                <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                                <h5 className="m-0">$99</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 mb-4">
-                                <div className="rounded overflow-hidden mb-2">
-                                    <img className="img-fluid" src="img/course-6.jpg" alt="" />
-                                    <div className="bg-secondary p-4">
-                                        <div className="d-flex justify-content-between mb-3">
-                                            <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                            <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                        </div>
-                                        <a className="h5" href="">Web design & development courses for beginner</a>
-                                        <div className="border-top mt-4 pt-4">
-                                            <div className="d-flex justify-content-between">
-                                                <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                                <h5 className="m-0">$99</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+
+                                )
+                            }
+
                         </div>
                     </div>
                 </div>

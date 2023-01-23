@@ -48,12 +48,18 @@ export default function Navbar(){
                             <Link to="/" class="nav-item nav-link">Home</Link>
                             <Link to="/aboutUs" class="nav-item nav-link">About</Link>
                             <Link to="/roomDetail" class="nav-item nav-link active">Flat Details</Link>
-                            <a href="teacher.html" class="nav-item nav-link">Teachers</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Explore</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <Link to="/search-flat" class="dropdown-item">Search Flat</Link>
                                     <a href="single.html" class="dropdown-item">Search Roomi</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Add Details</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <Link to="/addFlat" class="dropdown-item">Add Flat</Link>
+                                    <a href="single.html" class="dropdown-item">Add Your Details</a>
                                 </div>
                             </div>
                             <Link to="/contactUs" class="nav-item nav-link">Contact</Link>

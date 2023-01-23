@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser"; 
 import cors from "cors";
 import userRoute from './routes/user.route.js';
+import flatRoute from './routes/flat.route.js';
 
 const app =  express();
 
@@ -27,6 +28,7 @@ mongoose.connect('mongodb://dekhmate23:codebeans23@ac-o6dy0vx-shard-00-00.nl2vb4
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended:true}));
         app.use("/user",userRoute);
+        app.use("/flat",flatRoute);
         app.listen(3000,(req,res)=>{
             console.log(`listening on http://localhost:${3000}`);
         })

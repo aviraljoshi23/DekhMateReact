@@ -12,7 +12,7 @@ export default function Banner() {
                 </ol>
                 <div className="carousel-inner">
                     <div className="carousel-item active" style={{ "minHeight": "300px" }}>
-                        <img className="position-relative w-100" src="img/carousel-1.jpg" style={{ "minHeight": "300px", "objectFit": "cover" }} />
+                        <img className="position-relative w-100" src="/hero-carousel/1.jpg" style={{ "minHeight": "200px", "objectFit": "cover" }} />
                         <div className="carousel-caption d-flex align-items-center justify-content-center">
                             <div className="p-5" style={{ "width": "100%", "maxWidth": "900px" }}>
                                 <h5 className="text-white text-uppercase mb-md-3">Best Online Rented Room</h5>
