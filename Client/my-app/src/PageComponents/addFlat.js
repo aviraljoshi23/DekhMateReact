@@ -1,11 +1,11 @@
 import WebService from "../WebWork/WebService"
 import WebApi from "../WebWork/WebApi"
-import { ToastContainer,toast } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function AddFlat() {
-    const {user} = useSelector(state=>state.user.value);
+    const { user } = useSelector(state => state.user.value);
     console.log("In Add Flat");
     console.log(user);
     let locationField = useRef();
@@ -23,13 +23,13 @@ export default function AddFlat() {
         for (let i = 0; i < flatImages.length; i++) {
             formData.append("flatImages", flatImages[i]);
         }
-        formData.set("flatLocation",locationField.current.value);
-        formData.set("lookingFor",lookingForField.current.value);
-        formData.set("Rent",flatRentField.current.value);
-        formData.set("Occupancy",OccupancyField.current.value);
-        formData.set("AreaZipCode",flatAreaZipCodeField.current.value);
-        formData.set("flatDescription",flatDescriptionField.current.value);
-        formData.set("AvailableDate",AvailableDateField.current.value);
+        formData.set("flatLocation", locationField.current.value);
+        formData.set("lookingFor", lookingForField.current.value);
+        formData.set("Rent", flatRentField.current.value);
+        formData.set("Occupancy", OccupancyField.current.value);
+        formData.set("AreaZipCode", flatAreaZipCodeField.current.value);
+        formData.set("flatDescription", flatDescriptionField.current.value);
+        formData.set("AvailableDate", AvailableDateField.current.value);
         try {
             let res = await WebService.postApi(WebApi.ADD_FLAT, formData);
             if (res.data.status) {
@@ -68,7 +68,7 @@ export default function AddFlat() {
     //   }
 
     return <>
-    <ToastContainer/>
+        <ToastContainer />
         <div class="container-fluid pt-5">
             <div class="row px-xl-5">
                 <div class="col-lg-8">
@@ -115,8 +115,8 @@ export default function AddFlat() {
                                 <label>Occupancy*</label>
                                 <select class="custom-select" ref={OccupancyField}>
                                     <option selected value="Single">Single</option>
-                                    <option value = "Shared">Shared</option>
-                                    <option value = "Any">Any</option>
+                                    <option value="Shared">Shared</option>
+                                    <option value="Any">Any</option>
                                 </select>
                             </div>
                             <div class="col-md-6 form-group">
@@ -130,7 +130,7 @@ export default function AddFlat() {
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Upload 4 Photos of your flat</label>
-                                <input class="form-control" type="File"  multiple onChange={onFileChange} placeholder="New York" />
+                                <input class="form-control" type="File" multiple onChange={onFileChange} placeholder="New York" />
                                 <p style={{ fontSize: 12 }}>You can upload images upto <strong>25 MB</strong></p>
                             </div>
                             <div class="col-md-6 form-group">
@@ -138,6 +138,41 @@ export default function AddFlat() {
                                 <input class="form-control" type="text" ref={flatAreaZipCodeField} placeholder="406856" />
                             </div>
 
+                            {/* <article class="feature1">
+                                <input type="checkbox" id="feature1" />
+                                <div>
+                                    <span>
+                                    <i class="bi bi-bag-fill"></i>
+                                    </span>
+                                </div>
+                            </article>
+
+                            <article class="feature2">
+                                <input type="checkbox" id="feature2" />
+                                <div>
+                                    <span>
+                                    <i class="bi bi-bag-fill"></i>
+                                    </span>
+                                </div>
+                            </article>
+
+                            <article class="feature3">
+                                <input type="checkbox" id="feature3" />
+                                <div>
+                                    <span>
+                                    <i class="bi bi-bag-fill"></i>
+                                    </span>
+                                </div>
+                            </article>
+
+                            <article class="feature4">
+                                <input type="checkbox" id="feature4" />
+                                <div>
+                                    <span>
+                                    <i class="bi bi-bag-fill"></i>
+                                    </span>
+                                </div>
+                            </article> */}
                             <div class="col-md-6 form-group" >
                                 <label>Flat Description*</label>
                                 <textarea rows={4} ref={flatDescriptionField} class="form-control" type="text" placeholder="Give Flat Details" style={{ backgroundColor: '#f5f5f5' }} />

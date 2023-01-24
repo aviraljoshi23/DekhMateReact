@@ -1,7 +1,16 @@
+import { useState } from "react";
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom";
 
 export default function HaveFlat() {
     const { flatList } = useSelector(state => state.flat.value);
+    const [query,setQuery] = useState("");
+
+    let navigate  = useNavigate();
+    const viewFlat = (e,item) => {
+        e.preventDefault();
+        navigate("/roomDetail",{state:item});
+    }
     return <>
 
         {/* <!-- Page Header Start --> */}
@@ -151,7 +160,7 @@ export default function HaveFlat() {
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <form action="">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search by Area" />
+                                            <input type="text" onChange={(e)=>setQuery(e.target.value)} class="form-control" placeholder="Search by Area" />
                                             <div class="input-group-append">
                                                 <span class="input-group-text bg-transparent text-primary">
                                                     <i class="fa fa-search"></i>
@@ -173,7 +182,8 @@ export default function HaveFlat() {
                                 </div>
                             </div>
                             {
-                                flatList.map((item) =>
+                                flatList.filter((area)=>
+                                area.flatLocation.includes(query)).map((item) =>
                                     <div className="col-lg-4 col-md-6 mb-4">
                                         <div className="rounded overflow-hidden mb-2">
                                             <img className="img-fluid"  src={"http://localhost:3000/FlatImage/" + item.flatImages[1]} alt="" />
@@ -182,7 +192,7 @@ export default function HaveFlat() {
                                                     <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>{item.Occupancy}</small>
                                                     <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>{item.AvailableDate}</small>
                                                 </div>
-                                                <a className="h5" href="">{item.flatLocation.substr(0,13)}....</a>
+                                                <a className="h5" href="" onClick={(e)=>viewFlat(e,item)}>{item.flatLocation.substr(0,13)}....</a>
                                                 <h6 className="mt-3">{item.userId.userName}</h6>
                                                 <div className="border-top mt-4 pt-4">
                                                     <div className="d-flex justify-content-between">

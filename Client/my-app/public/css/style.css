@@ -9956,3 +9956,92 @@ h6,
   padding: 0;
   list-style-type: none;
 }
+
+
+
+
+article {
+  position: relative;
+  width: 140px;
+  height: 100px;
+  margin: 5px;
+  float: left;
+  border-radius: 40px;
+  border: 2px solid #fa7537;
+  box-sizing: border-box;
+}
+
+article div {
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 25px;
+  transition: .5s ease;
+}
+
+article input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 100px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked ~ div {
+  background-color: #fa7537;
+}
+
+.upgrade-btn {
+  display: block;
+  margin: 30px auto;
+  width: 200px;
+  padding: 10px 20px;
+  border: 2px solid #fa7537;
+  border-radius: 50px;
+  color: #fa7537;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .3s ease;
+}
+
+.upgrade-btn:hover {
+  background-color: #fa7537;
+}
+
+.blue-color {
+  color: #fa7537;
+}
+
+.gray-color {
+  color:#fff;
+}
+
+.social i:before {
+  width: 14px;
+  height: 14px;
+  position: fixed;
+  color: #fff;
+  background: #0077B5;
+  padding: 10px;
+  border-radius: 50%;
+  top:5px;
+  right:5px;
+}
+
+@keyframes slidein {
+  from {
+    margin-top: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin: 0%;
+    width: 100%;
+  }
+}

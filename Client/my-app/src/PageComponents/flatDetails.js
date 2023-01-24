@@ -1,4 +1,7 @@
+import {useLocation} from "react-router-dom"
 export default function FlatDetails() {
+    const location = useLocation();
+    const flat = location.state;
     return <>
 
         {/* <!-- Rooms Detail Start --> */}
@@ -8,16 +11,16 @@ export default function FlatDetails() {
                     <div id="product-carousel" className="carousel slide" data-ride="carousel">
                         <div className="carousel-inner border">
                             <div className="carousel-item active">
-                                <img className="w-100 h-100" src="img/product-1.jpg" alt="Image" />
+                                <img className="w-100 h-100" src={"http://localhost:3000/FlatImage/" + flat.flatImages[0]} alt="Image" />
                             </div>
                             <div className="carousel-item">
-                                <img className="w-100 h-100" src="img/product-2.jpg" alt="Image" />
+                                <img className="w-100 h-100" src={"http://localhost:3000/FlatImage/" + flat.flatImages[1]} alt="Image" />
                             </div>
                             <div className="carousel-item">
-                                <img className="w-100 h-100" src="img/product-3.jpg" alt="Image" />
+                                <img className="w-100 h-100" src={"http://localhost:3000/FlatImage/" + flat.flatImages[2]} alt="Image" />
                             </div>
                             <div className="carousel-item">
-                                <img className="w-100 h-100" src="img/product-4.jpg" alt="Image" />
+                                <img className="w-100 h-100" src={"http://localhost:3000/FlatImage/" + flat.flatImages[3]} alt="Image" />
                             </div>
                         </div>
                         <a className="carousel-control-prev" href="#product-carousel" data-slide="prev">
@@ -137,9 +140,8 @@ export default function FlatDetails() {
                     </div>
                     <div className="tab-content">
                         <div className="tab-pane fade show active" id="tab-pane-1">
-                            <h4 className="mb-3">Product Description</h4>
-                            <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                            <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                            <h4 className="mb-3">Room Discription</h4>
+                            <p>{flat.flatDescription}</p>
                         </div>
                         <div className="tab-pane fade" id="tab-pane-2">
                             <h4 className="mb-3">Additional Information</h4>
