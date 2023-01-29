@@ -1,10 +1,41 @@
-import {useLocation} from "react-router-dom"
+import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom"
+import { toast, ToastContainer } from "react-toastify";
+import WebApi from "../WebWork/WebApi";
+import WebService from "../WebWork/WebService";
 export default function FlatDetails() {
     const location = useLocation();
     const flat = location.state;
+    let navigate = useNavigate()
+    console.log(flat);
+    const senderRequirementField = useRef();
+    const { user } = useSelector(state => state.user.value);
+    const checkPlans = () => {
+        navigate("/plans")
+    }
+
+    const sendRequestEmail = (e) => {
+        e.preventDefault();
+        let obj = {
+            senderName: user.userName,
+            senderEmail:user.userEmail,
+            senderRequirement:senderRequirementField.current.value,
+            reciverName:flat.userId.userName,
+            reciverEmail:flat.userId.userEmail,
+        }
+        console.log(obj);
+        let res = WebService.postApi(WebApi.SEND_FLAT_MAIL,obj);
+        if(res.data.status){
+            toast.success(res.data.message);
+            
+        }
+    }
+
     return <>
 
         {/* <!-- Rooms Detail Start --> */}
+        <ToastContainer></ToastContainer>
         <div className="container-fluid py-5">
             <div className="row px-xl-5">
                 <div className="col-lg-5 pb-5">
@@ -136,7 +167,7 @@ export default function FlatDetails() {
                     <div className="nav nav-tabs justify-content-center border-secondary mb-4">
                         <a className="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
                         <a className="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
-                        <a className="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                        <a className="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Contact Owner</a>
                     </div>
                     <div className="tab-content">
                         <div className="tab-pane fade show active" id="tab-pane-1">
@@ -183,51 +214,32 @@ export default function FlatDetails() {
                         </div>
                         <div className="tab-pane fade" id="tab-pane-3">
                             <div className="row">
-                                <div className="col-md-6">
-                                    <h4 className="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                    <div className="media mb-4">
-                                        <img src="img/user.jpg" alt="Image" className="img-fluid mr-3 mt-1" style={{ "width": "45px" }} />
-                                        <div className="media-body">
-                                            <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                            <div className="text-primary mb-2">
-                                                <i className="fas fa-star"></i>
-                                                <i className="fas fa-star"></i>
-                                                <i className="fas fa-star"></i>
-                                                <i className="fas fa-star-half-alt"></i>
-                                                <i className="far fa-star"></i>
+                                <div class="col-lg-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body text-center">
+                                            <img src={"/UserProfiles/" + flat.userId.userProfileImage} alt="avatar"
+                                                class="rounded-circle img-fluid" style={{ width: 150 }} />
+                                            <h5 class="my-3">{flat.userId.userName}</h5>
+                                            <p class="text-muted mb-1">Full Stack Developer</p>
+                                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                                            <div class="d-flex justify-content-center mb-2">
+                                                <button type="button" class="btn btn-outline-primary ms-1" onClick={checkPlans}>Call</button>
                                             </div>
-                                            <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+
+
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <h4 className="mb-4">Leave a review</h4>
+                                    <h4 class="mb-4">Share your Interest</h4>
                                     <small>Your email address will not be published. Required fields are marked *</small>
-                                    <div className="d-flex my-3">
-                                        <p className="mb-0 mr-2">Your Rating * :</p>
-                                        <div className="text-primary">
-                                            <i className="far fa-star"></i>
-                                            <i className="far fa-star"></i>
-                                            <i className="far fa-star"></i>
-                                            <i className="far fa-star"></i>
-                                            <i className="far fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <form>
-                                        <div className="form-group">
-                                            <label for="message">Your Review *</label>
-                                            <textarea id="message" cols="30" rows="5" className="form-control"></textarea>
-                                        </div>
-                                        <div className="form-group">
-                                            <label for="name">Your Name *</label>
-                                            <input type="text" className="form-control" id="name" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label for="email">Your Email *</label>
-                                            <input type="email" className="form-control" id="email" />
+                                    <form onSubmit={(e) => sendRequestEmail(e)}>
+                                        <div class="form-group">
+                                            <label for="message">Your Requirement *</label>
+                                            <textarea id="message" cols="30" rows="5" class="form-control" ref={senderRequirementField}></textarea>
                                         </div>
                                         <div className="form-group mb-0">
-                                            <input type="submit" value="Leave Your Review" className="btn btn-primary px-3" />
+                                            <button type="submit" className="btn btn-primary px-3">Share your Interest</button>
                                         </div>
                                     </form>
                                 </div>

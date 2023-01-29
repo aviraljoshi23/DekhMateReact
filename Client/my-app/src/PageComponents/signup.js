@@ -10,21 +10,15 @@ export default function SignUp() {
     let userContactField = useRef();
     let userNameField = useRef();
     const [userGender, setGender] = useState();
-
+    const [userPreference,setUserPreference] = useState([]);
+    
     const NewAccount = async (e) => {
         e.preventDefault();
-        let obj = {
-            userEmail: userEmailField.current.value,
-            userPassword: userPasswordField.current.value,
-            userGender: userGender,
-            userProfileImage: "",
-        }
-        console.log(obj);
         let res = await WebService.postApi(WebApi.USER_SIGNUP,
             {
                 userEmail: userEmailField.current.value,
-                userName:userNameField.current.value,
-                userContact:userContactField.current.value,
+                userName: userNameField.current.value,
+                userContact: userContactField.current.value,
                 userPassword: userPasswordField.current.value,
                 userGender: userGender,
                 userProfileImage: ""
@@ -33,8 +27,19 @@ export default function SignUp() {
             toast.success(res.data.message);
         }
     }
+    const getUserPreference =(e)=>{
+            const {value,checked} =  e.target
+            if(checked){
+                console.log(userPreference);
+                setUserPreference([...userPreference,value]);
+            }
+            else{
+                setUserPreference(userPreference.filter((e)=> e!==value))
+            }
+        }
+    
     return <>
-        <ToastContainer/>
+        <ToastContainer />
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <div class="text-center mb-5">
@@ -51,7 +56,7 @@ export default function SignUp() {
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group">
-                                    <input type="text" class="form-control border-0 p-4"  placeholder="Your Name" ref={userNameField} required="required" data-validation-required-message="Please enter your account name" />
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Your Name" ref={userNameField} required="required" data-validation-required-message="Please enter your account name" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group">

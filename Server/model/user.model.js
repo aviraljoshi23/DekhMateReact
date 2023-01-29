@@ -31,5 +31,4 @@ const userSchema = mongoose.Schema({
         required:true,
     }
 })
-
 export const  userModel =  mongoose.model('user',userSchema);

@@ -47,19 +47,18 @@ export default function Navbar(){
                         <div class="navbar-nav py-0">
                             <Link to="/" class="nav-item nav-link">Home</Link>
                             <Link to="/aboutUs" class="nav-item nav-link">About</Link>
-                            <Link to="/roomDetail" class="nav-item nav-link active">Flat Details</Link>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Explore</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <Link to="/search-flat" class="dropdown-item">Search Flat</Link>
-                                    <a href="single.html" class="dropdown-item">Search Roomi</a>
+                                    <Link to="/getRoomi" class="dropdown-item">Search Roomi</Link>
                                 </div>
                             </div>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Add Details</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <Link to="/addFlat" class="dropdown-item">Add Flat</Link>
-                                    <a href="single.html" class="dropdown-item">Add Your Details</a>
+                                    <Link to="/addFlat" class="dropdown-item">Add Your Flat</Link>
+                                    <Link to="/needRoom" class="dropdown-item">Add Your Details</Link>
                                 </div>
                             </div>
                             <Link to="/contactUs" class="nav-item nav-link">Contact</Link>

@@ -36,6 +36,9 @@ const flatSchema = mongoose.Schema({
     },
     flatImages:{
         type:[]
+    },
+    flatAmenities:{
+        type:[]
     }
 })
 

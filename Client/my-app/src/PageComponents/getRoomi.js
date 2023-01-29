@@ -1,26 +1,20 @@
-import { useState } from "react";
 import { useSelector } from "react-redux"
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-export default function HaveFlat() {
-    const { flatList } = useSelector(state => state.flat.value);
-    const [query,setQuery] = useState("");
-    const [sortedFlat,setSortedFlat] = useState();
-    
-    let navigate  = useNavigate();
-    const viewFlat = (e,item) => {
+export default function GetRoomi(){
+    const {findRoommateList}  = useSelector(state=>state.getRoommate.value);
+    console.log(findRoommateList);
+    let navigate = useNavigate();
+    const viewRoommate = (e,item)=>{
         e.preventDefault();
-        navigate("/roomDetail",{state:item});
+        navigate("/viewRoomMate",{state:item});
     }
-    const sortByRent = (e)=>{
-        e.preventDefault();
-      flatList = [...flatList].sort((a, b) => b.Rent > a.Rent ? -1 : 1);
-    }
-    return <>
-        {/* <!-- Page Header Start --> */}
+    return<>
+    <ToastContainer></ToastContainer>
         <div className="container-fluid bg-secondary mb-5">
             <div className="d-flex flex-column align-items-center justify-content-center" style={{ "min-height": "300px" }}>
-                <h1 className="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
+                <h1 className="font-weight-semi-bold text-uppercase mb-3">Find Room Partner</h1>
                 <div className="d-inline-flex">
                     <p className="m-0"><a href="">Home</a></p>
                     <p className="m-0 px-2">-</p>
@@ -71,7 +65,6 @@ export default function HaveFlat() {
                             </div>
                         </form>
                     </div>
-                    {/* <!-- Price End --> */}
 
                     {/* <!-- filers Start --> */}
                     <div className="border-bottom mb-4 pb-4">
@@ -89,7 +82,7 @@ export default function HaveFlat() {
                             </div>
                             <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" className="custom-control-input" id="color-2" />
-                                <label className="custom-control-label" for="color-2">White</label>
+                                <label cresultlassName="custom-control-label" for="color-2">White</label>
                                 <span className="badge border font-weight-normal">295</span>
                             </div>
                             <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -138,7 +131,7 @@ export default function HaveFlat() {
                             <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" className="custom-control-input" id="size-4" />
                                 <label className="custom-control-label" for="size-4">L</label>
-                                <span className="badge border font-weight-normal">145</span>
+                                <span className="badge border font-weight-nShopormal">145</span>
                             </div>
                             <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                 <input type="checkbox" className="custom-control-input" id="size-5" />
@@ -163,7 +156,7 @@ export default function HaveFlat() {
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <form action="">
                                         <div class="input-group">
-                                            <input type="text" onChange={(e)=>setQuery(e.target.value)} class="form-control" placeholder="Search by Area" />
+                                            <input type="text" class="form-control" placeholder="Search by Area" />
                                             <div class="input-group-append">
                                                 <span class="input-group-text bg-transparent text-primary">
                                                     <i class="fa fa-search"></i>
@@ -177,30 +170,29 @@ export default function HaveFlat() {
                                             Sort by
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="#" onClick={(e)=>sortByRent(e)}>Rent</a>
+                                            <a class="dropdown-item" href="#">Rent</a>
                                             <a class="dropdown-item" href="#">Popularity</a>
                                             <a class="dropdown-item" href="#">Best Rating</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {
-                                flatList.filter((area)=>
-                                area.flatLocation.includes(query)).map((item) =>
+                              {
+                                findRoommateList.map((item) =>
                                     <div className="col-lg-4 col-md-6 mb-4">
                                         <div className="rounded overflow-hidden mb-2">
-                                            <img className="img-fluid"  src={"http://localhost:3000/FlatImage/" + item.flatImages[0]} alt="" />
+                                            <img className="img-fluid"  src={"http://localhost:3000/UserProfiles/" + item.userId.userProfileImage} alt=""  />
                                             <div className="bg-secondary p-4">
                                                 <div className="d-flex justify-content-between mb-3">
-                                                    <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>{item.Occupancy}</small>
-                                                    <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>{item.AvailableDate}</small>
+                                                    <small className="m-0"><i className="fa fa-users text-primary mr-2"></i>{item.roommatelookingFor}</small>
+                                                    <small className="m-0"><i className="far fa-clock text-primary mr-2"></i>{item.Date}</small>
                                                 </div>
-                                                <a className="h5" href="" onClick={(e)=>viewFlat(e,item)}>{item.flatLocation.substr(0,13)}....</a>
+                                                <a className="h5" href="" onClick={(e)=>viewRoommate(e,item)}>{item.roommateLocation.substr(0,13)}....</a>
                                                 <h6 className="mt-3">{item.userId.userName}</h6>
                                                 <div className="border-top mt-4 pt-4">
                                                     <div className="d-flex justify-content-between">
                                                         <h6 className="m-0"><i className="fa fa-star text-primary mr-2"></i>45% Match</h6>
-                                                        <h5 className="m-0">Rent {item.Rent}</h5>
+                                                        <h6 className="m-0">Expected Rent {item.requiredRent}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,7 +200,7 @@ export default function HaveFlat() {
                                     </div>
 
                                 )
-                            }
+                            } 
 
                         </div>
                     </div>
@@ -216,7 +208,5 @@ export default function HaveFlat() {
                 {/* <!-- roooms End --> */}
             </div>
         </div>
-
-
     </>
 }

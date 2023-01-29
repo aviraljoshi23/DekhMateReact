@@ -2,6 +2,8 @@ import { flatModel } from "../model/flat.model.js"
 
 export const addFlat =  async(req,res,next)=>{
     console.log(req.body);
+    const Amenities  = req.body.flatAmenities.split(',');
+    req.body.flatAmenities  =  Amenities;
     try{
         let arr = [];
         for(let i = 0;i<req.files.length;i++){

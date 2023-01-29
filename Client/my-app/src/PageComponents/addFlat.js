@@ -15,10 +15,15 @@ export default function AddFlat() {
     let AvailableDateField = useRef();
     let flatDescriptionField = useRef();
     let flatAreaZipCodeField = useRef();
+    const [flatAmenities,setAmenities] =  useState([]);
     const [flatImages, setflatImage] = useState([]);
 
     const save = async (e) => {
+        let validation = validateImageSize();
+        if(validation){
+        console.log(flatAmenities);
         let formData = new FormData();
+
         formData.set("userId", user._id);
         for (let i = 0; i < flatImages.length; i++) {
             formData.append("flatImages", flatImages[i]);
@@ -30,6 +35,12 @@ export default function AddFlat() {
         formData.set("AreaZipCode", flatAreaZipCodeField.current.value);
         formData.set("flatDescription", flatDescriptionField.current.value);
         formData.set("AvailableDate", AvailableDateField.current.value);
+        for(let i =0;i<flatAmenities.length;i++){
+            formData.append("flatAmenities",flatAmenities);
+        }
+        console.log("Flat Amenities");
+        console.log(flatAmenities);
+        formData.set("flatAmenities",flatAmenities);
         try {
             let res = await WebService.postApi(WebApi.ADD_FLAT, formData);
             if (res.data.status) {
@@ -37,35 +48,47 @@ export default function AddFlat() {
             }
         } catch (error) {
             toast.error("Internal Server Error");
+        }}
+        else{
+            toast.error("Invalid Image Size ");
         }
     }
+    const getAmenities = (e)=>{
+        const {value,checked} =  e.target
+        if(checked){
+            setAmenities([...flatAmenities,value]);
+        }
+        else{
+            setAmenities(flatAmenities.filter((e)=> e!==value))
+        }
+    }
+
     const onFileChange = (e) => {
         setflatImage(e.target.files)
     }
-    //   const validateImageSize = ()=>{
-    //     if(flatImages.length!=4){
-    //         toast.error("Please Pick 4 Photographs");
-    //     }
-    //     let MAX_LENGTH  = 1000*25; // 250000
-    //     console.log(MAX_LENGTH); // 250000
-    //     let FILE_LENGTH=0;
-    //     for(let i  = 0;i<flatImages.length;i++){
-    //         console.log(flatImages[i].size);
-    //         FILE_LENGTH+=flatImages[i].size; //300000
-    //     }
-    //     console.log(FILE_LENGTH);
-    //     if(FILE_LENGTH>MAX_LENGTH){
-    //         toast.error("File Size is more than 25 mb");
-    //     }
-    //     else{
-    //         toast.success("Accepted");
-    //     }
-    //     // const fileSizeKiloBytes = flatImages.size / 1024
-    //     // if(fileSizeKiloBytes>MAX_LENGTH)
-    //     // {
-    //     //     toast.error("File Size is more than 25 mb");
-    //     // }
-    //   }
+      const validateImageSize = ()=>{
+        if(flatImages.length!=4){
+            toast.error("Please Pick 4 Photographs");
+        }
+        else{
+            let MAX_LENGTH  = 1024*0.1; // 250000
+            console.log(MAX_LENGTH); // 250000
+            let FILE_LENGTH=0;
+            for(let i  = 0;i<flatImages.length;i++){
+                console.log(flatImages[i].size);
+                FILE_LENGTH+=flatImages[i].size/1024; //300000 bytes 
+            }
+            console.log(FILE_LENGTH);
+            if(FILE_LENGTH>MAX_LENGTH){
+                toast.error("File Size is more than 25 mb");
+            }
+            else{
+                toast.success("Accepted");
+                return true
+            }
+        }
+        return false;
+      }
 
     return <>
         <ToastContainer />
@@ -137,45 +160,50 @@ export default function AddFlat() {
                                 <label>Area ZIP Code*</label>
                                 <input class="form-control" type="text" ref={flatAreaZipCodeField} placeholder="406856" />
                             </div>
-
-                            {/* <article class="feature1">
-                                <input type="checkbox" id="feature1" />
-                                <div>
-                                    <span>
-                                    <i class="bi bi-bag-fill"></i>
-                                    </span>
-                                </div>
-                            </article>
-
-                            <article class="feature2">
-                                <input type="checkbox" id="feature2" />
-                                <div>
-                                    <span>
-                                    <i class="bi bi-bag-fill"></i>
-                                    </span>
-                                </div>
-                            </article>
-
-                            <article class="feature3">
-                                <input type="checkbox" id="feature3" />
-                                <div>
-                                    <span>
-                                    <i class="bi bi-bag-fill"></i>
-                                    </span>
-                                </div>
-                            </article>
-
-                            <article class="feature4">
-                                <input type="checkbox" id="feature4" />
-                                <div>
-                                    <span>
-                                    <i class="bi bi-bag-fill"></i>
-                                    </span>
-                                </div>
-                            </article> */}
                             <div class="col-md-6 form-group" >
                                 <label>Flat Description*</label>
                                 <textarea rows={4} ref={flatDescriptionField} class="form-control" type="text" placeholder="Give Flat Details" style={{ backgroundColor: '#f5f5f5' }} />
+                            </div>
+                            <h5 class="font-weight-semi-bold mb-4">Flate Amenities<br/></h5>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}> Tv</label>
+                                <input value="Tv" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Fridge</label>
+                                <input value="Fridge" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Kitchen</label>
+                                <input value="Kitchen" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Wifi</label>
+                                <input value="Wifi" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Machine</label>
+                                <input  value="Machine" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Ac</label>
+                                <input value="AC" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>24/7 Water</label>
+                                <input value="24/7 Water" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Parking</label>
+                                <input value="Parking" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Cook</label>
+                                <input value="Cook" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label style={{fontSize:20}}>Vehical</label>
+                                <input value="Vehical" onChange={(e)=>getAmenities(e)} type="checkbox"></input>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center mb-2">

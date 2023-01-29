@@ -16,7 +16,7 @@ export default function Banner() {
                         <div className="carousel-caption d-flex align-items-center justify-content-center">
                             <div className="p-5" style={{ "width": "100%", "maxWidth": "900px" }}>
                                 <h5 className="text-white text-uppercase mb-md-3">Best Online Rented Room</h5>
-                                <h1 className="display-3 text-white mb-md-4">Search your Ferfect Match</h1>
+                                <h1 className="display-3 text-white mb-md-4">Search your Perfect Match</h1>
                                 <a href="" className="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
                             </div>
                         </div>
