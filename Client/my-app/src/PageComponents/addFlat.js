@@ -71,7 +71,7 @@ export default function AddFlat() {
             toast.error("Please Pick 4 Photographs");
         }
         else{
-            let MAX_LENGTH  = 1024*0.1; // 250000
+            let MAX_LENGTH  = 1024*5; // 250000
             console.log(MAX_LENGTH); // 250000
             let FILE_LENGTH=0;
             for(let i  = 0;i<flatImages.length;i++){

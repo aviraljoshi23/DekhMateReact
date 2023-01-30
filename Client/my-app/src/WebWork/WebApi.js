@@ -7,5 +7,5 @@ export default {
     NEED_ROOM_LIST:"/needroom/list",
     NEED_ROOM_ADD:"/needroom/add",
     NEED_ROOM_UPDATE:"/needroom/update",
-    SEND_FLAT_MAIL:"/message/sendFlatmail"
+    SEND_FLAT_REQUEST:"/request/sendFlatRequest"
 }

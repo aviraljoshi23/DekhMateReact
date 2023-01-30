@@ -9,7 +9,6 @@ export default function FlatDetails() {
     const flat = location.state;
     let navigate = useNavigate()
     console.log(flat);
-    const senderRequirementField = useRef();
     const { user } = useSelector(state => state.user.value);
     const checkPlans = () => {
         navigate("/plans")
@@ -18,15 +17,17 @@ export default function FlatDetails() {
     const sendRequestEmail = (e) => {
         e.preventDefault();
         let obj = {
+            senderId:user._id,
             senderName: user.userName,
             senderEmail:user.userEmail,
-            senderRequirement:senderRequirementField.current.value,
+            senderRequirement:"I'm Intrested For the Place",
+            reciverId:flat.userId._id,
             reciverName:flat.userId.userName,
             reciverEmail:flat.userId.userEmail,
         }
         console.log(obj);
-        let res = WebService.postApi(WebApi.SEND_FLAT_MAIL,obj);
-        if(res.data.status){
+        let res = WebService.postApi(WebApi.SEND_FLAT_REQUEST,obj);
+        if(res.status){
             toast.success(res.data.message);
             
         }
@@ -232,14 +233,10 @@ export default function FlatDetails() {
                                 </div>
                                 <div className="col-md-6">
                                     <h4 class="mb-4">Share your Interest</h4>
-                                    <small>Your email address will not be published. Required fields are marked *</small>
+                                    <hr/>
                                     <form onSubmit={(e) => sendRequestEmail(e)}>
-                                        <div class="form-group">
-                                            <label for="message">Your Requirement *</label>
-                                            <textarea id="message" cols="30" rows="5" class="form-control" ref={senderRequirementField}></textarea>
-                                        </div>
                                         <div className="form-group mb-0">
-                                            <button type="submit" className="btn btn-primary px-3">Share your Interest</button>
+                                            <button type="submit" className="btn btn-primary px-3">Send your Interest</button>
                                         </div>
                                     </form>
                                 </div>

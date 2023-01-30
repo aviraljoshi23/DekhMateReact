@@ -29,6 +29,9 @@ const userSchema = mongoose.Schema({
     userProfileImage:{
         type:String,
         required:true,
+    },
+    messageBox:{
+        type:[],
     }
 })
 export const  userModel =  mongoose.model('user',userSchema);

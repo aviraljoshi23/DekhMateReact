@@ -7,7 +7,7 @@ import cors from "cors";
 import userRoute from './routes/user.route.js';
 import flatRoute from './routes/flat.route.js';
 import needRoomRoute from './routes/needroom.route.js';
-import messageRoute from './routes/message.route.js';
+import requestRoute from './routes/request.route.js';
 
 const app =  express();
 
@@ -33,7 +33,7 @@ mongoose.connect('mongodb://dekhmate23:codebeans23@ac-o6dy0vx-shard-00-00.nl2vb4
         app.use("/user",userRoute);
         app.use("/flat",flatRoute);
         app.use("/needroom",needRoomRoute);
-        app.use("/message",messageRoute);
+        app.use("/request",requestRoute);
         app.listen(3000,(req,res)=>{
             console.log(`listening on http://localhost:${3000}`);
         })
